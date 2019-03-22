@@ -14,7 +14,7 @@ def get_fields():
         'X_GOOGLE_FUNCTION_VERSION': dim_prefix + '_function_version'
     }
 
-    for env_name, dim in env_dims:
+    for env_name, dim in env_dims.items():
         runtime_env = os.environ.get(env_name)
         if env_name is not None:
             fields[dim] = runtime_env
