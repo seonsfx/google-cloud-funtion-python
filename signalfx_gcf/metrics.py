@@ -55,10 +55,10 @@ def generate_wrapper_decorator(access_token):
             global ingest
             # timeout for connecting = 1 and responding 0.3
             ingest = sfx.ingest(access_token, timeout=(1, ingest_timeout))
-            context = args[1]  # expect context to be second argument
+            # context = args[1]  # expect context to be second argument
 
             global default_dimensions
-            default_dimensions.update(utils.get_fields(context))
+            # default_dimensions.update(utils.get_fields(context))
             default_dimensions['metric_source'] = 'gcf_wrapper'
 
             global is_cold_start
