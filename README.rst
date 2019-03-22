@@ -1,12 +1,12 @@
 SignalFx Python Google Cloud Function Wrapper
 ==============================
 
-SignalFx Python  Google Cloud Function Wrapper.
+SignalFx Python Google Cloud Function Wrapper.
 
 Usage
 -----
 
-The SignalFx Python  Google Cloud Function Wrapper is a wrapper around an  Google Cloud Function
+The SignalFx Python Google Cloud Function Wrapper is a wrapper around a Google Cloud Function
 Python function handler, used to instrument execution of the function
 and send metrics and traces to SignalFx.
 
@@ -79,23 +79,23 @@ Wrapping a function
 
 There are two wrappers provided.
 
-For metrics, decorate your handler with @signalfx_lambda.emits_metrics
+For metrics, decorate your handler with @signalfx_gcf.emits_metrics
 
 ::
 
-    import signalfx_lambda
+    import signalfx_gcf
 
-    @signalfx_lambda.emits_metrics
+    @signalfx_gcf.emits_metrics
     def handler(event, context):
         # your code
 
-For tracing, use the @signalfx_lambda.is_traced decorator
+For tracing, use the @signalfx_gcf.is_traced decorator
 
 ::
 
-    import signalfx_lambda
+    import signalfx_gcf
 
-    @signalfx_lambda.is_traced
+    @signalfx_gcf.is_traced
     def handler(event, context):
         # your code
 
@@ -104,65 +104,50 @@ The decorators can be used individually or together.
 Metrics and dimensions sent by the metrics wrapper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Lambda wrapper sends the following metrics to SignalFx:
+The Google Cloud Function wrapper sends the following metrics to SignalFx:
 
 +-----------------------+-----------------------+-----------------------+
 | Metric Name           | Type                  | Description           |
 +=======================+=======================+=======================+
-| function.invocations  | Counter               | Count number of       |
-|                       |                       | Lambda invocations    |
+| function.invocations  | Counter               | Count number of Cloud |
+|                       |                       | Funtion invocations   |
 +-----------------------+-----------------------+-----------------------+
 | function.cold_starts  | Counter               | Count number of cold  |
 |                       |                       | starts                |
 +-----------------------+-----------------------+-----------------------+
 | function.errors       | Counter               | Count number of       |
 |                       |                       | errors from           |
-|                       |                       | underlying Lambda     |
-|                       |                       | handler               |
+|                       |                       | underlying Cloud      |
+|                       |                       | Function handler      |
 +-----------------------+-----------------------+-----------------------+
 | function.duration     | Gauge                 | Milliseconds in       |
 |                       |                       | execution time of     |
-|                       |                       | underlying Lambda     |
-|                       |                       | handler               |
+|                       |                       | underlying Cloud      |
+|                       |                       | Function handler      |
 +-----------------------+-----------------------+-----------------------+
 
-The Lambda wrapper adds the following dimensions to all data points sent
-to SignalFx:
+The Google Cloud Function wrapper adds the following dimensions to all data points
+send to SignalFx:
 
 +----------------------------------+----------------------------------+
-| Dimension                        | Description                      |
+| Tag                              | Description                      |
 +==================================+==================================+
-| aws_request_id                   | AWS Request ID                   |
+| gcf_region                       | Google Cloud Function Region     |
 +----------------------------------+----------------------------------+
-| lambda_arn                       | ARN of the Lambda function       |
-|                                  | instance                         |
+| gcf_project_id                   | Google Cloud Function Project ID |
 +----------------------------------+----------------------------------+
-| aws_region                       | AWS Region                       |
+| gcf_function_name                | Google Cloud Function Name       |
 +----------------------------------+----------------------------------+
-| aws_account_id                   | AWS Account ID                   |
+| gcf_function_version             | Google Cloud Function Version    |
 +----------------------------------+----------------------------------+
-| aws_function_name                | AWS Function Name                |
-+----------------------------------+----------------------------------+
-| aws_function_version             | AWS Function Version             |
-+----------------------------------+----------------------------------+
-| aws_function_qualifier           | AWS Function Version Qualifier   |
-|                                  | (version or version alias if it  |
-|                                  | is not an event source mapping   |
-|                                  | Lambda invocation)               |
-+----------------------------------+----------------------------------+
-| event_source_mappings            | AWS Function Name (if it is an   |
-|                                  | event source mapping Lambda      |
-|                                  | invocation)                      |
-+----------------------------------+----------------------------------+
-| aws_execution_env                | AWS execution environment        |
-|                                  | (e.g. AWS_Lambda_python3.6)      |
+| function_wrapper_version         | AWS Function Name                |
 +----------------------------------+----------------------------------+
 | function_wrapper_version         | SignalFx function wrapper        |
 |                                  | qualifier                        |
-|                                  | (e.g. signalfx_lambda_0.0.2)     |
+|                                  | (e.g. signalfx_gcf_0.0.2)        |
 +----------------------------------+----------------------------------+
 | metric_source                    | The literal value of             |
-|                                  | ‘lambda_wrapper’                 |
+|                                  | ‘gcf_wrapper’                    |
 +----------------------------------+----------------------------------+
 
 Traces and tags sent by the Tracing wrapper
@@ -173,53 +158,38 @@ The tracing wrapper creates a span for the wrapper handler. This span has the fo
 +----------------------------------+----------------------------------+
 | Tag                              | Description                      |
 +==================================+==================================+
-| aws_request_id                   | AWS Request ID                   |
+| gcf_region                       | Google Cloud Function Region     |
 +----------------------------------+----------------------------------+
-| lambda_arn                       | ARN of the Lambda function       |
-|                                  | instance                         |
+| gcf_project_id                   | Google Cloud Function Project ID |
 +----------------------------------+----------------------------------+
-| aws_region                       | AWS Region                       |
+| gcf_function_name                | Google Cloud Function Name       |
 +----------------------------------+----------------------------------+
-| aws_account_id                   | AWS Account ID                   |
+| gcf_function_version             | Google Cloud Function Version    |
 +----------------------------------+----------------------------------+
-| aws_function_name                | AWS Function Name                |
-+----------------------------------+----------------------------------+
-| aws_function_version             | AWS Function Version             |
-+----------------------------------+----------------------------------+
-| aws_function_qualifier           | AWS Function Version Qualifier   |
-|                                  | (version or version alias if it  |
-|                                  | is not an event source mapping   |
-|                                  | Lambda invocation)               |
-+----------------------------------+----------------------------------+
-| event_source_mappings            | AWS Function Name (if it is an   |
-|                                  | event source mapping Lambda      |
-|                                  | invocation)                      |
-+----------------------------------+----------------------------------+
-| aws_execution_env                | AWS execution environment        |
-|                                  | (e.g. AWS_Lambda_python3.6)      |
+| function_wrapper_version         | AWS Function Name                |
 +----------------------------------+----------------------------------+
 | function_wrapper_version         | SignalFx function wrapper        |
 |                                  | qualifier                        |
-|                                  | (e.g. signalfx_lambda_0.0.2)     |
+|                                  | (e.g. signalfx_gcf_0.0.2)        |
 +----------------------------------+----------------------------------+
 | component                        | The literal value of             |
-|                                  | ‘python-lambda-wrapper’          |
+|                                  | ‘python-gcf-wrapper’             |
 +----------------------------------+----------------------------------+
 
-Sending custom metric from the Lambda function
+Sending custom metric from the Google Cloud Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-    import signalfx_lambda
+    import signalfx_gcf
 
     # sending application_performance metric with value 100 and dimension abc:def
-    signalfx_lambda.send_gauge('application_performance', 100, {'abc':'def'})
+    signalfx_gcf.send_gauge('application_performance', 100, {'abc':'def'})
 
     # sending counter metric with no dimension
-    signalfx_lambda.send_counter('database_calls', 1)
+    signalfx_gcf.send_counter('database_calls', 1)
 
-Adding manual tracing to the Lambda function
+Adding manual tracing to the Google Cloud Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Manual instrumentation can be added to trace critical parts of your handler
@@ -242,18 +212,6 @@ function.
 More examples and usage information can be found in the Jaeger Python Tracer
 `documentation <https://github.com/signalfx/jaeger-client-python>`_.
 
-Testing it out locally
-~~~~~~~~~~~~~~~~~~~~~~
-
-Use python-lambda-local
-
-::
-
-    pip install python-lambda-local
-
-::
-
-    python-lambda-local tests/test.py tests/event.json -a 'arn:aws:lambda:us-east-1:accountId:function:functionNamePython:$LATEST'
 
 Packaging
 ~~~~~~~~~

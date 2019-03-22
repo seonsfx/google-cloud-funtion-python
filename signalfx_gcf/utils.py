@@ -4,7 +4,7 @@ import warnings
 from .version import name, version
 
 fields = {}
-dim_prefix = 'gcp'
+dim_prefix = 'gcf'
 
 def get_fields():
     env_dims = {
@@ -18,6 +18,8 @@ def get_fields():
         runtime_env = os.environ.get(env_name)
         if env_name is not None:
             fields[dim] = runtime_env
+    
+    fields['function_wrapper_version'] = name + '_' + version
 
     return fields.copy()
 
