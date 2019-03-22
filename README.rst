@@ -140,8 +140,6 @@ send to SignalFx:
 +----------------------------------+----------------------------------+
 | gcf_function_version             | Google Cloud Function Version    |
 +----------------------------------+----------------------------------+
-| function_wrapper_version         | AWS Function Name                |
-+----------------------------------+----------------------------------+
 | function_wrapper_version         | SignalFx function wrapper        |
 |                                  | qualifier                        |
 |                                  | (e.g. signalfx_gcf_0.0.2)        |
@@ -165,8 +163,6 @@ The tracing wrapper creates a span for the wrapper handler. This span has the fo
 | gcf_function_name                | Google Cloud Function Name       |
 +----------------------------------+----------------------------------+
 | gcf_function_version             | Google Cloud Function Version    |
-+----------------------------------+----------------------------------+
-| function_wrapper_version         | AWS Function Name                |
 +----------------------------------+----------------------------------+
 | function_wrapper_version         | SignalFx function wrapper        |
 |                                  | qualifier                        |
