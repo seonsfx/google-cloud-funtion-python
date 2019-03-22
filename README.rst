@@ -1,12 +1,12 @@
-SignalFx Python Lambda Wrapper
+SignalFx Python Google Cloud Function Wrapper
 ==============================
 
-SignalFx Python Lambda Wrapper.
+SignalFx Python  Google Cloud Function Wrapper.
 
 Usage
 -----
 
-The SignalFx Python Lambda Wrapper is a wrapper around an AWS Lambda
+The SignalFx Python  Google Cloud Function Wrapper is a wrapper around an  Google Cloud Function
 Python function handler, used to instrument execution of the function
 and send metrics and traces to SignalFx.
 
@@ -17,7 +17,7 @@ To install from PyPi
 
 ::
 
-    $ pip install signalfx_lambda
+    $ pip install signalfx_gcf
 
 Configuring the ingest endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

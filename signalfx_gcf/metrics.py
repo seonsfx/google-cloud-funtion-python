@@ -59,7 +59,7 @@ def generate_wrapper_decorator(access_token):
 
             global default_dimensions
             default_dimensions.update(utils.get_fields(context))
-            default_dimensions['metric_source'] = 'lambda_wrapper'
+            default_dimensions['metric_source'] = 'gcf_wrapper'
 
             global is_cold_start
             start_counters = [

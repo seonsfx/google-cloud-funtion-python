@@ -14,9 +14,9 @@ def wrapper(func):
         tracer = init_jaeger_tracer(context)
 
         span_tags = utils.get_fields(context)
-        span_tags['component'] = 'python-lambda-wrapper'
+        span_tags['component'] = 'python-gcf-wrapper'
 
-        span_prefix = os.getenv('SIGNALFX_SPAN_PREFIX', 'lambda_python_')
+        span_prefix = os.getenv('SIGNALFX_SPAN_PREFIX', 'gcf_python_')
 
         try:
             with tracer.start_active_span(span_prefix + context.function_name, tags=span_tags) as scope:

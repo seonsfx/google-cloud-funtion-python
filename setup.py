@@ -4,7 +4,7 @@
 
 from setuptools import setup, find_packages
 
-with open('signalfx_lambda/version.py') as f:
+with open('signalfx_gcf/version.py') as f:
     exec(f.read())
 
 with open('README.rst') as readme:
@@ -18,7 +18,7 @@ setup(
     version=version,  # noqa
     author='SignalFx, Inc',
     author_email='info@signalfx.com',
-    description='SignalFx Lambda Python Wrapper',
+    description='SignalFx https://github.com/seonsfx/google-cloud-funtion-python Python Wrapper',
     license='Apache Software License v2',
     long_description=long_description,
     long_description_content_type='text/x-rst',
@@ -29,5 +29,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-    url='https://github.com/signalfx/lambda-python',
+    url='https://github.com/seonsfx/google-cloud-funtion-python',
 )
