@@ -2,6 +2,7 @@ import functools
 import os
 import opentracing
 import pip
+import warnings
 from jaeger_client import Config
 
 from . import utils
@@ -9,17 +10,20 @@ from . import utils
 def wrapper(func):
     @functools.wraps(func)
     def call(*args, **kwargs):
-        context = args[1]
+        function_name = os.environ.get('FUNCTION_NAME')
+        if function_name is None:
+            warnings.warn('FUNCTION_NAME cannot be found. Abort sending tracing')
+            return call
 
-        tracer = init_jaeger_tracer(context)
+        tracer = init_jaeger_tracer(function_name)
 
-        span_tags = utils.get_fields(context)
+        span_tags = utils.get_fields()
         span_tags['component'] = 'python-gcf-wrapper'
 
         span_prefix = os.getenv('SIGNALFX_SPAN_PREFIX', 'gcf_python_')
 
         try:
-            with tracer.start_active_span(span_prefix + context.function_name, tags=span_tags) as scope:
+            with tracer.start_active_span(span_prefix + function_name, tags=span_tags) as scope:
                 # call the original handler
                 return func(*args, **kwargs)
         except BaseException as e:
@@ -33,9 +37,9 @@ def wrapper(func):
     return call
 
 
-def init_jaeger_tracer(context):
+def init_jaeger_tracer(function_name):
     endpoint = utils.get_tracing_url()
-    service_name = os.getenv('SIGNALFX_SERVICE_NAME', context.function_name)
+    service_name = os.getenv('SIGNALFX_SERVICE_NAME', function_name)
     access_token = utils.get_access_token()
 
     tracer_config = {

@@ -4,21 +4,21 @@ import warnings
 from .version import name, version
 
 fields = {}
+dim_prefix = 'gcp'
 
 def get_fields():
-    # TODO: use a loop
-    runtime_env = os.environ.get('FUNCTION_REGION')
-    if runtime_env is not None:
-        fields['gcp_region'] = runtime_env
-    runtime_env = os.environ.get('GCP_PROJECT')
-    if runtime_env is not None:
-        fields['gcp_project_id'] = runtime_env
-    runtime_env = os.environ.get('FUNCTION_NAME')
-    if runtime_env is not None:
-        fields['gcp_function_name'] = runtime_env
-    runtime_env = os.environ.get('X_GOOGLE_FUNCTION_VERSION')
-    if runtime_env is not None:
-        fields['gcp_function_version'] = runtime_env
+    env_dims = {
+        'FUNCTION_REGION': dim_prefix + '_region',
+        'GCP_PROJECT': dim_prefix + '_project_id',
+        'FUNCTION_NAME': dim_prefix + '_function_name',
+        'X_GOOGLE_FUNCTION_VERSION': dim_prefix + '_function_version'
+    }
+
+    for env_name, dim in env_dims:
+        runtime_env = os.environ.get(env_name)
+        if env_name is not None:
+            fields[dim] = runtime_env
+
     return fields.copy()
 
 
