@@ -58,7 +58,7 @@ def generate_wrapper_decorator(access_token):
             # context = args[1]  # expect context to be second argument
 
             global default_dimensions
-            # default_dimensions.update(utils.get_fields(context))
+            default_dimensions.update(utils.get_fields())
             default_dimensions['metric_source'] = 'gcf_wrapper'
 
             global is_cold_start
