@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (C) 2017 SignalFx, Inc. All rights reserved.
+# Copyright (C) 2019 SignalFx, Inc. All rights reserved.
 
 from setuptools import setup, find_packages
 
@@ -18,7 +18,7 @@ setup(
     version=version,  # noqa
     author='SignalFx, Inc',
     author_email='info@signalfx.com',
-    description='SignalFx https://github.com/seonsfx/google-cloud-funtion-python Python Wrapper',
+    description='SignalFx https://github.com/signalfx/google-cloud-funtion-python Python Wrapper',
     license='Apache Software License v2',
     long_description=long_description,
     long_description_content_type='text/x-rst',
@@ -29,5 +29,5 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-    url='https://github.com/seonsfx/google-cloud-funtion-python',
+    url='https://github.com/signalfx/google-cloud-funtion-python',
 )
