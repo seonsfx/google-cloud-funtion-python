@@ -26,7 +26,7 @@ setup(
     packages=find_packages(),
     install_requires=requirements,
     dependency_links=[
-        'https://github.com/seonsfx/signalfx_serverless_common/tarball/master#egg=signalfx_serverless_common-0.1.1.1'
+        'https://github.com/seonsfx/signalfx_serverless_common/tarball/master#egg=signalfx-serverless-common-0.1.1.1'
     ],
     classifiers=[
         'Operating System :: OS Independent',
