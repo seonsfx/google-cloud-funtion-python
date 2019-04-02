@@ -25,9 +25,6 @@ setup(
     zip_safe=True,
     packages=find_packages(),
     install_requires=requirements,
-    # install_requires=[
-    #     "signalfx_serverless_common @ git+git://github.com/seonsfx/serverless-common-python@5a90b53c179a8043487f1a8733434dd3a3c958d3#egg=signalfx_serverless_common",
-    # ],
     classifiers=[
         'Operating System :: OS Independent',
         'Programming Language :: Python',
