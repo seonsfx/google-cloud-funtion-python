@@ -1,1 +1,3 @@
 git+git://github.com/seonsfx/serverless-common-python
+signalfx>=1.0.16
+sfx-jaeger-client>=3.13.1.dev0
