@@ -1,4 +1,4 @@
-from signalfx_serverless_common import * as signalfx_serverless_common
+import signalfx_serverless_common
 
 from . import utils
 from .version import name, version
