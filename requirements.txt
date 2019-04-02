@@ -1,1 +1,0 @@
-git+git://github.com/seonsfx/serverless-common-python@e4f4989a3a2b18a3b01dd4916194a737deaf574c
