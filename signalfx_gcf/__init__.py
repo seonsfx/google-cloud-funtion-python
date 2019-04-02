@@ -1,5 +1,7 @@
 import signalfx_serverless_common
 
+from .version import name, version
+
 # backwards compatibility
 def wrapper(*args, **kwargs):
     return signalfx_serverless_common.wrapper(*args, **kwargs)
