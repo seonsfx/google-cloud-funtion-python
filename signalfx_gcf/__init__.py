@@ -1,6 +1,11 @@
 import signalfx_serverless_common
 
+from . import utils
 from .version import name, version
+
+def __init():
+    fields = utils.get_fields()
+    signalfx_serverless_common.set_fields(fields)
 
 # backwards compatibility
 def wrapper(*args, **kwargs):
