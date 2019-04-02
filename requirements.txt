@@ -1,1 +1,1 @@
-signalfx_serverless_common
+signalfx_serverless_common==0.0.1
